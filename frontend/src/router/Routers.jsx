@@ -7,6 +7,8 @@ import SearchResultList from "../pages/Searchresultlist";
 import TourDetails from "../pages/Tourdetails";
 import Tours from "../pages/Tours";
 import Thankyou from '../pages/Thankyou';
+import About from '../components/About/About';
+import Gallery from '../components/Gallery/Gallery';
 
 const Routers = () => {
   return (
@@ -19,6 +21,8 @@ const Routers = () => {
       <Route path='/Tours/:id' element={<TourDetails />} />
       <Route path='/Tours' element={<Tours />} />
       <Route path='/Home' element={<Home />} />
+      <Route path='/About' element={<About />} />
+      <Route path='/Gallery' element={<Gallery />} />
     </Routes>
   );
 }

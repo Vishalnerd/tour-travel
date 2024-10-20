@@ -13,8 +13,12 @@ import Featuredtourlist from "../components/Featured-tours/Featuredtourlist";
 import MasonryImagesGallery from "../components/image-gallery/masonryImagesGallery";
 import Testimonial from "../components/Testimonial/Testimonial";
 import Newsletter from "../shared/Newsletter";
+import { useEffect } from "react";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 function Home() {
+  AOS.init();
   return (
     <>
       <section>
@@ -26,11 +30,11 @@ function Home() {
                   <Subtitle subtitle={"Know before you go"} />
                   <img src={worldImg} alt="world icon" />
                 </div>
-                <h1>
+                <h1 data-aos="slide-right" data-aos-duration="1500">
                   Travelling opens the door to creating{" "}
                   <span className="highlight">memories</span>
                 </h1>
-                <p>
+                <p data-aos="slide-right" data-aos-duration="1500">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit. Iure,
                   architecto! Exercitationem adipisci ullam, velit qui
                   voluptatem inventore, saepe laudantium ab earum molestiae
@@ -40,17 +44,17 @@ function Home() {
             </Col>
 
             <Col lg="2">
-              <div className="hero__img-box">
+              <div data-aos="flip-right" data-aos-duration="1500" className="hero__img-box">
                 <img src={heroImg} alt="travel" />
               </div>
             </Col>
             <Col lg="2">
-              <div className="hero__img-box hero__video-box mt-4">
-              <video src={heroVideo} alt="Travel video" autoPlay loop muted playsInline />
+              <div data-aos="flip-right" data-aos-duration="1500" className="hero__img-box hero__video-box mt-4">
+              <video src={heroVideo} alt="Travel video" autoPlay loop muted playsInline  />
               </div>
             </Col>
             <Col lg="2">
-              <div className="hero__img-box mt-5">
+              <div data-aos="flip-right" data-aos-duration="1500" className="hero__img-box mt-5">
                 <img src={heroImg02} alt="travel" />
               </div>
             </Col>
@@ -63,11 +67,11 @@ function Home() {
       <section>
         <Container>
           <Row>
-            <Col lg="3">
+            <Col data-aos="fade-right" data-aos-duration="1500" lg="3">
               <h5 className="services__subtitle">What we serve</h5>
               <h2 className="services__title">We offer our best services</h2>
             </Col>
-            <Servicelist />
+            <Servicelist  />
           </Row>
         </Container>
       </section>
@@ -77,7 +81,7 @@ function Home() {
           <Row>
             <Col lg="12" className="mb-5 ">
               <Subtitle subtitle={"Explore"} />
-              <h2 className="featured__tour-title">Our Featured Tours</h2>
+              <h2 data-aos="fade-right" data-aos-duration="1500" className="featured__tour-title">Our Featured Tours</h2>
             </Col>
             <Featuredtourlist />
           </Row>
@@ -90,10 +94,10 @@ function Home() {
             <Col lg="6">
               <div className="experience__content">
                 <Subtitle subtitle={"Experience"} />
-                <h2>
+                <h2 data-aos="slide-down" data-aos-duration="1500">
                   With all our experience <br /> we will serve you
                 </h2>
-                <p>
+                <p data-aos="slide-down" data-aos-duration="1500">
                   Lorem ipsum dolor sit amet consectetur adipisicing elit.
                   Tenetur enim, porro nemo quia ea facilis quam, culpa
                   cupiditate ipsum laborum, beatae nisi architecto accusamus!
@@ -101,7 +105,7 @@ function Home() {
                   Dicta voluptatibus dolorum tempore ipsum maiores?
                 </p>
               </div>
-              <div className="counter__wrapper d-flex align-items-center gap-5">
+              <div data-aos="slide-down" data-aos-duration="1500" className="counter__wrapper d-flex align-items-center gap-5">
                 <div className="counter__box">
                   <span>12k+</span>
                   <h6>Successfull Trip</h6>
@@ -117,7 +121,7 @@ function Home() {
               </div>
             </Col>
             <Col lg="6">
-              <div className="experience__img">
+              <div data-aos="slide-up" data-aos-duration="1500" className="experience__img">
                 <img src={experienceImg} alt="" />
               </div>
             </Col>
@@ -135,7 +139,7 @@ function Home() {
               </h2>
             </Col>
             <Col lg="12">
-              <MasonryImagesGallery />
+              <MasonryImagesGallery  />
             </Col>
           </Row>
         </Container>

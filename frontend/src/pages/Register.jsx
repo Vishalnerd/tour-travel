@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { useContext, useState, useEffect } from "react";
 import "../styles/Login.css";
 import { Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,28 +6,39 @@ import registerImg from "../assets/images/register.png";
 import userIcon from "../assets/images/user.png";
 import { AuthContext } from "./../context/AuthContext";
 import { BASE_URL } from "./../utils/config";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Importing icons
 
 const Register = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [credentials, setCredentials] = useState({
     username: "",
     email: "",
     password: "",
   });
   const [error, setError] = useState("");
+  const [showPassword, setShowPassword] = useState(false);
+
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
 
   const handleChange = (e) => {
-    setCredentials((prev) => ({ ...prev, [e.target.id]: e.target.value }));
+    const { id, value } = e.target;
+    setCredentials((prev) => ({ ...prev, [id]: value }));
   };
 
   const handleClick = async (e) => {
     e.preventDefault();
-   
 
     try {
-      // Basic client-side validation
-      if (!credentials.username || !credentials.email || !credentials.password) {
+      if (
+        !credentials.username ||
+        !credentials.email ||
+        !credentials.password
+      ) {
         setError("All fields are required.");
         return;
       }
@@ -48,9 +59,10 @@ const Register = () => {
       }
 
       dispatch({ type: "REGISTER_SUCCESS" });
-      navigate("/login");
+      toast.success("Registration successful!");
+      navigate("/home");
     } catch (error) {
-      setError("Registration failed. Please try again later.");
+      toast.error("Registration Failed. Try Again!");
     }
   };
 
@@ -90,17 +102,31 @@ const Register = () => {
                       onChange={handleChange}
                     />
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup className="position-relative">
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"} // Toggle input type
                       placeholder="Password"
                       required
                       id="password"
                       value={credentials.password}
                       onChange={handleChange}
                     />
+                    <button
+                      type="button"
+                      className="password-toggle"
+                      onClick={() => setShowPassword(!showPassword)} // Toggle password visibility
+                    >
+                      {showPassword ? (
+                        <AiOutlineEyeInvisible />
+                      ) : (
+                        <AiOutlineEye />
+                      )}
+                    </button>
                   </FormGroup>
-                  <Button className="btn secondary__btn auth__btn" type="submit">
+                  <Button
+                    className="btn secondary__btn auth__btn"
+                    type="submit"
+                  >
                     Create Account
                   </Button>
                 </Form>
@@ -112,6 +138,7 @@ const Register = () => {
           </Col>
         </Row>
       </Container>
+      <ToastContainer />
     </section>
   );
 };

@@ -3,9 +3,12 @@ import Slider from "react-slick";
 import ava01 from "../../assets/images/ava-1.jpg";
 import ava02 from "../../assets/images/ava-2.jpg";
 import ava03 from "../../assets/images/ava-3.jpg";
+import "./Testimonial.css";
+import AOS from 'aos';
+import 'aos/dist/aos.css';
 
 const Testimonial = () => {
-
+  AOS.init();
     const settings={
         dots:true,
         infinite:true,
@@ -36,7 +39,7 @@ const Testimonial = () => {
     }
   return (
     <Slider {...settings}>
-      <div className="testimonial py-4 px-3">
+      <div data-aos="fade-up" data-aos-duration="2500" className="testimonial py-4 px-3">
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat
           deserunt a nesciunt temporibus minima, fugit facere consectetur nihil
@@ -53,7 +56,7 @@ const Testimonial = () => {
         </div>
       </div>
 
-      <div className="testimonial py-4 px-3">
+      <div data-aos="fade-up" data-aos-duration="2500" data-aos-delay="50" className="testimonial py-4 px-3">
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat
           deserunt a nesciunt temporibus minima, fugit facere consectetur nihil
@@ -70,7 +73,7 @@ const Testimonial = () => {
         </div>
       </div>
 
-      <div className="testimonial py-4 px-3">
+      <div data-aos="fade-up" data-aos-duration="2500" data-aos-delay="100" className="testimonial py-4 px-3">
         <p>
           Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quaerat
           deserunt a nesciunt temporibus minima, fugit facere consectetur nihil

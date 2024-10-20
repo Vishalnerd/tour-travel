@@ -36,6 +36,11 @@
 
 .hero__img-box {
   padding-top: 2rem;
+  transition: transform 0.3s ease;
+}
+
+.hero__img-box:hover {
+  transform: translateY(-20px); /* Slide up effect on hover */
 }
 
 .services__subtitle {
@@ -70,6 +75,16 @@
 .counter__wrapper {
   margin-top: 2.5rem;
 }
+.counter__box {
+ 
+  transition: transform 0.3s ease, box-shadow 0.3s ease, background-color 0.3s ease;
+}
+
+.counter__box:hover {
+  transform: scale(1.1); /* Slight zoom effect */
+ border-bottom: 2px groove var(--primary-color);
+
+}
 
 .counter__box span {
   height: 70px;
@@ -78,13 +93,19 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: var(--primary-color);
+  background: linear-gradient(135deg, #ff7f50, #ff4500);;
+  
+  transition: transform 0.5s ease, background 0.5s ease, color 0.5s ease;
   color: #fff;
   font-size: 1.6rem;
   font-weight: 600;
   border-radius: 10px 5px 10px 5px;
 }
-
+.counter__box:hover span {
+  transform: rotate(360deg) scale(1.1); /* Rotate and slightly scale the span */
+  background: linear-gradient(135deg, #ff4500, #ff7f50); /* Gradient color change */
+ 
+}
 .counter__box h6 {
   font-size: 1.1rem;
   margin-top: 0.7rem;

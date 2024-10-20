@@ -8,6 +8,8 @@ import { Container, Row, Col } from "reactstrap";
 
 import useFetch from "../hooks/useFetch";
 import { BASE_URL } from "../utils/config";
+import Skeleton from 'react-loading-skeleton';
+import 'react-loading-skeleton/dist/skeleton.css';
 
 function Tours() {
   const [pageCount, setPageCount] = useState(0);
@@ -18,9 +20,9 @@ function Tours() {
 
   useEffect(() => {
     if (tourCount) {
-      const pages = Math.ceil(tourCount / 8); 
+      const pages = Math.ceil(tourCount / 8);
       setPageCount(pages);
-      window.scrollTo(0,0);
+      window.scrollTo(0, 0);
     }
   }, [tourCount]);
 
@@ -41,12 +43,23 @@ function Tours() {
 
       <section className="pt-0">
         <Container>
-          {loading && <h4 className="text-center pt-5">Loading.....</h4>}
+          {loading && (
+            <Row>
+              {[...Array(8)].map((_, index) => (
+                <Col lg="3" md="6" sm="6" className="mb-4" key={index}>
+                  <Skeleton height={300} /> {/* Skeleton for the card image */}
+                  <Skeleton height={20} width="80%" style={{ marginTop: '10px' }} /> {/* Skeleton for the title */}
+                  <Skeleton height={20} width="60%" style={{ marginTop: '5px' }} /> {/* Skeleton for the subtitle */}
+                  <Skeleton height={20} width="70%" style={{ marginTop: '5px' }} /> {/* Skeleton for price/other details */}
+                </Col>
+              ))}
+            </Row>
+          )}
           {error && <h4 className="text-center pt-5">{error}</h4>}
           {!loading && !error && (
             <Row>
               {tours?.slice(page * 8, (page + 1) * 8).map((tour) => (
-                <Col lg="3" md='6' sm='6' className="mb-4" key={tour._id}>
+                <Col lg="3" md="6" sm="6" className="mb-4" key={tour._id}>
                   <Tourcard tour={tour} />
                 </Col>
               ))}

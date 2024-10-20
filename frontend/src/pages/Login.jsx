@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext,useEffect } from "react";
 import "../styles/Login.css";
 import { Container, Row, Col, Form, FormGroup, Button } from "reactstrap";
 import { Link, useNavigate } from "react-router-dom";
@@ -6,12 +6,19 @@ import loginImg from "../assets/images/login.png";
 import userIcon from "../assets/images/user.png";
 import { AuthContext } from "./../context/AuthContext";
 import { BASE_URL } from "./../utils/config";
+import { toast, ToastContainer } from "react-toastify";
+import "react-toastify/dist/ReactToastify.css";
+import { AiOutlineEye, AiOutlineEyeInvisible } from "react-icons/ai"; // Import icons
 
 const Login = () => {
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
   const [credentials, setCredentials] = useState({
     email: "",
     password: "",
   });
+  const [showPassword, setShowPassword] = useState(false); // State to toggle password visibility
 
   const { dispatch } = useContext(AuthContext);
   const navigate = useNavigate();
@@ -38,9 +45,11 @@ const Login = () => {
       if (!res.ok) return alert(result.message);
   
       dispatch({ type: 'LOGIN_SUCCESS', payload: result.data });
+      toast.success("Login successful!");
       navigate('/');
     } catch (error) {
       dispatch({ type: 'LOGIN_FAILURE', payload: error.message });
+      toast.error("Login failed. Please try again later.");
     }
   };
 
@@ -70,15 +79,26 @@ const Login = () => {
                       onChange={handleChange}
                     />
                   </FormGroup>
-                  <FormGroup>
+                  <FormGroup className="password-field">
                     <input
-                      type="password"
+                      type={showPassword ? "text" : "password"} // Toggle password visibility
                       placeholder="Password"
                       required
                       id="password"
                       value={credentials.password}
                       onChange={handleChange}
                     />
+                    <button
+                      type="button"
+                      className="password-toggle"
+                      onClick={() => setShowPassword(!showPassword)}
+                    >
+                      {showPassword ? (
+                        <AiOutlineEyeInvisible />
+                      ) : (
+                        <AiOutlineEye />
+                      )}
+                    </button>
                   </FormGroup>
                   <Button className="btn secondary__btn auth__btn" type="submit">
                     Login
@@ -93,6 +113,7 @@ const Login = () => {
           </Col>
         </Row>
       </Container>
+      <ToastContainer />
     </section>
   );
 };

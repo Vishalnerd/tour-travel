@@ -28,6 +28,11 @@
     color: var(--text-color);
     font-size: 1.1rem;
 }
+.footer__quick-links li a:hover{
+    text-decoration: underline;
+    color: var(--secondary-color);
+    
+}
 
 .footer__quick-links h6 span i{
     color: var(--secondary-color);
